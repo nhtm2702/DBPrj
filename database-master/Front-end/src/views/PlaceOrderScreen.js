@@ -1,0 +1,173 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import CheckoutSteps from "../components/CheckoutSteps";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
+import { createOrder } from "../actions/orderActions";
+import { ORDER_CREATE_RESET } from "../constants/orderConstants";
+import "bootstrap/dist/css/bootstrap.min.css";
+export default function PlaceOrderScreen(props) {
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  const cart = useSelector((state) => state.cart);
+  if (!cart.paymentMethod) {
+    props.history.push("/payment");
+  }
+  if (!userInfo) {
+    props.history.push("/signin");
+  }
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { loading, success, error, order } = orderCreate;
+
+  const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
+  cart.itemsPrice = toPrice(
+    cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0)
+  );
+  cart.shippingPrice = cart.itemsPrice > 100 ? 20000 : toPrice(0);
+  cart.totalPrice = cart.itemsPrice + cart.shippingPrice;
+  const today = new Date();
+  cart.orderDate =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  today.setDate(today.getDate() + 5);
+  cart.shippedDate =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  cart.status = "Đang xử lý";
+  cart.shipAddress =
+    cart.shippingAddress.address +
+    " " +
+    cart.shippingAddress.ward +
+    " " +
+    cart.shippingAddress.district +
+    " " +
+    cart.shippingAddress.city;
+  cart.customerName = cart.shippingAddress.fullName;
+  cart.phoneNumber = cart.shippingAddress.phoneNumber;
+  const dispatch = useDispatch();
+  const placeOrderHandler = () => {
+    dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
+    props.history.push("/")
+  };
+  useEffect(() => {
+    if (success) {
+      dispatch({ type: ORDER_CREATE_RESET });
+    }
+  }, [dispatch, order, success]);
+  function converToPrice(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  return (
+    <div>
+      <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
+      <div className="order-detail row top">
+        <div className=" col-md-6 ">
+          {/* <ul>
+            <li> */}
+          <div className="card card-body">
+            <h2>Địa chỉ giao hàng</h2>
+            <p>
+              <strong>Họ tên:</strong> {cart.shippingAddress.fullName} <br />
+              <strong>Số điện thoại: </strong>{" "}
+              {cart.shippingAddress.phoneNumber} <br />
+              <strong>Địa chỉ: </strong>{cart.shippingAddress.address},{" "}
+              {cart.shippingAddress.ward},{" "}{cart.shippingAddress.district},{" "}
+              {cart.shippingAddress.city}
+            </p>
+          </div>
+          {/* </li>
+            <li> */}
+          <div className="card card-body">
+            <h2>Thanh toán</h2>
+            <p>
+              <strong>Phương thức thanh toán:</strong> {cart.paymentMethod}
+            </p>
+          </div>
+          {/* </li>
+            <li> */}
+          <div className="card card-body">
+            <h2>Sản phẩm</h2>
+            {/* <ul> */}
+            {cart.cartItems.map((item) => (
+              <>
+                <div className="card card-body">
+                  {/* <li key={item.product}> */}
+                  <div className={`row orderItem ${item.product}`}>
+                    <div className="col-md-6">
+                      <div>
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="small1"
+                        ></img>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="min-30">
+                        <Link to={`/product/${item.product}`}>{item.name}</Link>
+                      </div>
+
+                      <div>
+                        {item.qty} x ${converToPrice(item.price)} = ${converToPrice(item.qty * item.price)}
+                      </div>
+                    </div>
+                  </div>
+                  {/* </li> */}
+                  {/* <hr /> */}
+                </div>
+              </>
+            ))}
+            {/* </ul> */}
+          </div>
+          {/* </li> */}
+          {/* </ul> */}
+        </div>
+        <div className="col-md-4">
+          <div className="card card-body">
+            <div className="Row">
+              {/* <ul>
+              <li> */}
+              <h2>Chi tiết sản phẩm</h2>
+              {/* </li>
+              <li> */}
+              {/* <div className="col-md-8"> */}
+                <div className="Row">
+                  <div><p>Tiền hàng: {converToPrice(cart.itemsPrice)}₫</p></div>
+                </div>
+                {/* </li>
+              <li> */}
+                <div className="Row">
+                  <div><p>Phí vận chuyển: {converToPrice(cart.shippingPrice)}₫ </p></div>
+                </div>
+                {/* </li>
+
+              <li> */}
+                <div className="roww">
+                  <div>
+                    <strong>Tổng tiền hàng: {converToPrice(cart.totalPrice)}₫</strong>
+                  </div>
+                  {/* </li>
+              <li> */}
+                </div>
+              {/* </div> */}
+              {/* <div className="col-md-4"> */}
+                <button
+                  type="button"
+                  className="btnn btn-warning "
+                  disabled={cart.cartItems.length === 0}
+                  onClick={placeOrderHandler}
+                >
+                  Xác nhận
+                </button>
+              {/* </div> */}
+
+              {/* </li> */}
+              {loading && <LoadingBox></LoadingBox>}
+              {error && <MessageBox variant="danger">{error}</MessageBox>}
+              {/* </ul> */}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
