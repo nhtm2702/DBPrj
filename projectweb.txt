@@ -1,0 +1,92 @@
+CREATE TABLE IF NOT EXISTS `brands` (
+	`idBrand` INTEGER(11) auto_increment , 
+	`brandName` VARCHAR(255) NOT NULL, 
+	PRIMARY KEY (`idBrand`)
+) ENGINE=InnoDB;
+ 
+SHOW INDEX FROM `brands` FROM `project_web`
+
+CREATE TABLE IF NOT EXISTS `categories` (
+	`idCategory` INTEGER(11) auto_increment , 
+	`categoryName` VARCHAR(255) NOT NULL, 
+	PRIMARY KEY (`idCategory`)
+) ENGINE=InnoDB;
+
+SHOW INDEX FROM `categories` FROM `project_web`
+
+CREATE TABLE IF NOT EXISTS `users` (
+	`idUser` INTEGER(11) auto_increment , 
+	`userEmail` VARCHAR(255) NOT NULL, 
+	`userPassword` VARCHAR(255) NOT NULL, 
+	`userFname` VARCHAR(255) NOT NULL, 
+	`userLname` VARCHAR(255) NOT NULL, 
+	`address` VARCHAR(255), 
+	`phone` VARCHAR(255), 
+	`isAdmin` TINYINT(1) DEFAULT false, 
+	PRIMARY KEY (`idUser`)
+) ENGINE=InnoDB;
+
+SHOW INDEX FROM `users` FROM `project_web`
+
+CREATE TABLE IF NOT EXISTS `orders` (
+	`idOrder` VARCHAR(255) , 
+	`customerName` VARCHAR(255) NOT NULL, 
+	`orderDate` DATE NOT NULL, `status` VARCHAR(255) NOT NULL, 
+	`phoneNumber` VARCHAR(255) NOT NULL, `shippedDate` DATE NOT NULL, 
+	`address` VARCHAR(255) NOT NULL, 
+	`shippingPrice` DECIMAL(10,2) NOT NULL, 
+	`paymentMethod` VARCHAR(255) NOT NULL, 
+	`idUser` INTEGER(11) NOT NULL, 
+	PRIMARY KEY (`idOrder`), 
+	FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB;
+
+SHOW INDEX FROM `orders` FROM `project_web`
+
+CREATE TABLE IF NOT EXISTS `products` (
+	`idProduct` INTEGER(11) auto_increment , 
+	`productName` VARCHAR(255) NOT NULL, 
+	`productPrice` INTEGER NOT NULL, 
+	`productDescription` TEXT NOT NULL, 
+	`idBrand` INTEGER NOT NULL, 
+	`idCategory` INTEGER NOT NULL, 
+	PRIMARY KEY (`idProduct`), 
+	FOREIGN KEY (`idBrand`) REFERENCES `brands` (`idBrand`) ON DELETE NO ACTION ON UPDATE CASCADE, 
+	FOREIGN KEY (`idCategory`) REFERENCES `categories` (`idCategory`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB;
+
+SHOW INDEX FROM `products` FROM `project_web`
+
+CREATE TABLE IF NOT EXISTS `orderdetail` (
+	`idOrder` VARCHAR(255) NOT NULL , 
+	`idProduct` INTEGER(11) NOT NULL , 
+	`priceEach` INTEGER NOT NULL, 
+	`quantityOrder` INTEGER NOT NULL, 
+	`sizeProduct` VARCHAR(255) NOT NULL, 
+	PRIMARY KEY (`idOrder`, `idProduct`), 
+	FOREIGN KEY (`idOrder`) REFERENCES `orders` (`idOrder`) ON DELETE CASCADE ON UPDATE CASCADE, 
+	FOREIGN KEY (`idProduct`) REFERENCES `products` (`idProduct`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB;
+
+SHOW INDEX FROM `orderdetail` FROM `project_web`
+
+CREATE TABLE IF NOT EXISTS `productdetail` (
+	`idImage` INTEGER auto_increment , 
+	`idProduct` INTEGER NOT NULL , 
+	`image` VARCHAR(255) NOT NULL, 
+	PRIMARY KEY (`idImage`, `idProduct`), 
+	FOREIGN KEY (`idProduct`) REFERENCES `products` (`idProduct`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB;
+
+SHOW INDEX FROM `productdetail` FROM `project_web`
+
+CREATE TABLE IF NOT EXISTS `productsizes` (
+	`idSize` INTEGER(11) auto_increment , 
+	`productSize` VARCHAR(255) NOT NULL, 
+	`quantityInStock` INTEGER NOT NULL, 
+	`idProduct` INTEGER(11) NOT NULL , 
+	PRIMARY KEY (`idSize`, `idProduct`), 
+	FOREIGN KEY (`idProduct`) REFERENCES `products` (`idProduct`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB;
+
+SHOW INDEX FROM `productsizes` FROM `project_web`

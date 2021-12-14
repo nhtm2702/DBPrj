@@ -14,20 +14,20 @@ function Footer() {
                 <div className="col-lg-4">
                   <div className="ft-about">
                     <div className="logo">
-                      <img src= {process.env.PUBLIC_URL+ "/image/logo.png"} alt="background-img" width={144} height={81} />
+                      <img src= {process.env.PUBLIC_URL+ "/image/logo.png"} alt="BG1-img" width={144} height={81} />
                     </div>
                     <p> Tấu hài là chính</p>
                     <div className="fa-social">
-                        <a href="https://www.facebook.com/bach.ngoxuan.5/">
+                        <a href="https://www.facebook.com/pt2907">
                           <FontAwesomeIcon icon={faFacebook} className="footer-icon" />
                         </a>
-                        <a href="https://twitter.com/BachNgoXuan1">
+                        <a href="https://twitter.com/NguyenHuynhTraMy">
                           <FontAwesomeIcon icon={faTwitter} className="footer-icon" />  
                         </a>
-                        <a href="https://www.instagram.com/_bachngo_/">
+                        <a href="https://www.instagram.com/n_meimei_/">
                           <FontAwesomeIcon icon={faInstagram} className="footer-icon" />
                         </a>
-                        <a href="https://www.youtube.com/channel/UCrF8X_A6ClAJm4OmrHfSaMA">
+                        <a href="https://www.youtube.com/channel/UCTbCZECt7bfbwfAyUZLpIvQ">
                           <FontAwesomeIcon icon={faYoutube} className="footer-icon" />  
                         </a>
                     </div>
@@ -37,9 +37,9 @@ function Footer() {
                   <div className="ft-contact">
                     <h6>Liên hệ</h6>
                     <ul>
-                      <li>Ngo Xuan Bach from Spider-man team of DS-KT Lab</li>
-                      <li>19021221@vnu.edu.vn</li>
-                      <li>Số 8 (tầng 2) Tôn Thất Thuyết, Quận Nam Từ Liêm, Thành phố Hà Nội</li>
+                      <li>Nguyen Huynh Tra My from UET</li>
+                      <li>20020223@vnu.edu.vn</li>
+                      <li>Số 3, Phúc Yên, Vĩnh Phúc</li>
                     </ul>
                   </div>
                 </div>

@@ -5,7 +5,7 @@ import { detailsProduct, updateProduct } from '../../actions/productActions';
 import LoadingBox from '../../components/LoadingBox';
 import MessageBox from '../../components/MessageBox';
 import { PRODUCT_UPDATE_RESET } from '../../constants/productConstants';
-import {listProductCategories, listProductBrands} from "../../actions/productActions";
+import {listProductCategories} from "../../actions/productActions";
 import '../css/EditProductScreen.css';
 
 
@@ -16,16 +16,12 @@ export default function ProductEditScreen(props) {
   const [image, setImage] = useState('');
   const [category, setCategory] = useState('');
   const [quantityInStock, setQuantityInStock] = useState('');
-  const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
   const [idProduct, setIdProduct] = useState(''); 
   const listCategory = useSelector((state) => state.listCategory);
   const {loading: loadingCategory, error: errorCategory, categories} = listCategory;
-  const listBrand = useSelector((state) => state.listBrand);
-  const {loading: loadingBrand, error: errorBrand, brands} = listBrand;
 
   const [qty, setQty] = useState('');
-  const [size, setSize] = useState(0);
   const productDetails = useSelector((state) => state.productDetails);
 
   const { loading, error, product } = productDetails;
@@ -46,7 +42,6 @@ export default function ProductEditScreen(props) {
         dispatch({ type: PRODUCT_UPDATE_RESET })
         dispatch(detailsProduct(productId));
         dispatch(listProductCategories());
-        dispatch(listProductBrands());
         
     } 
     else {
@@ -55,8 +50,7 @@ export default function ProductEditScreen(props) {
         setPrice(product.productPrice);
         setImage(product.productdetails[0].image);
         setCategory(product.idCategory);
-        setBrand(product.idBrand);
-        setQty(product.productsizes[size].quantityInStock);
+        setQty(product.quantityInStock);
         setDescription(product.productDescription);
     }
 
@@ -72,9 +66,7 @@ export default function ProductEditScreen(props) {
         price,
         image,
         category,
-        brand,
         qty,
-        size,
         description,
       })
     );
@@ -201,42 +193,6 @@ export default function ProductEditScreen(props) {
               {loadingCategory && <LoadingBox></LoadingBox>}
               {errorCategory && <MessageBox variant="danger">{errorCategory}</MessageBox>} 
             </div>
-          <div>
-              <label htmlFor="brand">Nhãn hàng</label>
-              <select className="categories-list" 
-                      value={brand}  
-                      onChange={(e) => setBrand(e.target.value)}
-              >
-              <option value=""  disabled hidden>Chọn</option>
-              { brands ? (
-              brands.map((x) => (
-                 <option  className= "category-select" key ={x.idBrand} value={x.idBrand}>
-                   {x.brandName}
-                 </option>
-              ))) : (
-                <option value={brand}> {product.brand.brandName}</option>
-              )
-              }
-              </select>
-              {loadingBrand && <LoadingBox></LoadingBox>}
-              {errorBrand && <MessageBox variant="danger">{errorBrand}</MessageBox>} 
-          </div>
-            <div>
-                  <p/>   
-                      Kích thước: &nbsp;
-                      <select className="item-sizes" 
-                        value={size}
-                        onChange={(e) => setSize(e.target.value)}
-                      >
-                          {product.productsizes.map((x)  => (
-                              <option key={x.idSize} value={x.idSize-1}>
-                                  {x.productSize}
-                                </option>
-                                )
-                              )}
-                        </select>
-                    <p/>         
-              </div>
                     <div className="quantity-button"> Số lượng: &nbsp;
                             <input className="input" type="text" value={qty} onChange={e => setQty(e.target.value)} />
                     </div>

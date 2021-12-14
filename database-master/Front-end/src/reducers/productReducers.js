@@ -20,21 +20,10 @@ const {
     PRODUCT_UPDATE_SUCCESS,
     PRODUCT_UPDATE_FAIL,
     PRODUCT_UPDATE_RESET,
-    PRODUCT_BRAND_LIST_REQUEST,
-    PRODUCT_BRAND_LIST_SUCCESS,
-    PRODUCT_BRAND_LIST_FAIL,
     CREATE_CATEGORY_REQUEST,
     CREATE_CATEGORY_SUCCESS,
     CREATE_CATEGORY_FAIL,
     CREATE_CATEGORY_RESET,
-    CREATE_BRAND_REQUEST,
-    CREATE_BRAND_SUCCESS,
-    CREATE_BRAND_FAIL,
-    CREATE_BRAND_RESET,
-    DELETE_BRAND_REQUEST,
-    DELETE_BRAND_SUCCESS,
-    DELETE_BRAND_FAIL,
-    DELETE_BRAND_RESET,
     DELETE_CATEGORY_REQUEST,
     DELETE_CATEGORY_SUCCESS,
     DELETE_CATEGORY_FAIL,
@@ -43,16 +32,9 @@ const {
     CATEGORY_UPDATE_SUCCESS,
     CATEGORY_UPDATE_FAIL,
     CATEGORY_UPDATE_RESET,
-    BRAND_UPDATE_REQUEST,
-    BRAND_UPDATE_SUCCESS,
-    BRAND_UPDATE_FAIL,
-    BRAND_UPDATE_RESET,
     CATEGORY_DETAILS_REQUEST,
     CATEGORY_DETAILS_SUCCESS,
     CATEGORY_DETAILS_FAIL,
-    BRAND_DETAILS_REQUEST,
-    BRAND_DETAILS_SUCCESS,
-    BRAND_DETAILS_FAIL,
     PLT_PRODUCT_REQUEST,
     PLT_PRODUCT_SUCCESS,
     PLT_PRODUCT_FAIL,
@@ -99,21 +81,6 @@ export const productCategoryListReducer = (
       case PRODUCT_CATEGORY_LIST_SUCCESS:
         return { loading: false, categories: action.payload };
       case PRODUCT_CATEGORY_LIST_FAIL:
-        return { loading: false, error: action.payload };
-      default:
-        return state;
-    }
-  };
-export const productBrandListReducer = (
-    state = { loading: true, brands: [] },
-    action
-  ) => {
-    switch (action.type) {
-      case PRODUCT_BRAND_LIST_REQUEST:
-        return { loading: true };
-      case PRODUCT_BRAND_LIST_SUCCESS:
-        return { loading: false, brands: action.payload };
-      case PRODUCT_BRAND_LIST_FAIL:
         return { loading: false, error: action.payload };
       default:
         return state;
@@ -218,65 +185,6 @@ export const categoryDetailsReducer = (state = { loading: true }, action) => {
     case CATEGORY_DETAILS_SUCCESS:
       return { loading: false, category: action.payload };
     case CATEGORY_DETAILS_FAIL:
-      return { loading: false, error: action.payload };
-    default:
-      return state;
-  }
-};
-
-
-export const brandCreateReducer = (state = {}, action) => {
-  switch (action.type) {
-    case CREATE_BRAND_REQUEST:
-      return { loading: true };
-    case CREATE_BRAND_SUCCESS:
-      return { loading: false, success: true, brand: action.payload };
-    case CREATE_BRAND_FAIL:
-      return { loading: false, error: action.payload };
-    case CREATE_BRAND_RESET:
-      return {};
-    default:
-      return state;
-  }
-};
-
-export const brandDeleteReducer = (state = {}, action) => {
-  switch (action.type) {
-    case DELETE_BRAND_REQUEST:
-      return { loading: true };
-    case DELETE_BRAND_SUCCESS:
-      return { loading: false, success: true };
-    case DELETE_BRAND_FAIL:
-      return { loading: false, error: action.payload };
-    case DELETE_BRAND_RESET:
-      return {};
-    default:
-      return state;
-  }
-};
-
-export const brandUpdateReducer = (state = {}, action) => {
-  switch (action.type) {
-    case BRAND_UPDATE_REQUEST:
-      return { loading: true };
-    case BRAND_UPDATE_SUCCESS:
-      return { loading: false, success: true };
-    case BRAND_UPDATE_FAIL:
-      return { loading: false, error: action.payload };
-    case BRAND_UPDATE_RESET:
-      return {};
-    default:
-      return state;
-  }
-};
-
-export const brandDetailsReducer = (state = { loading: true }, action) => {
-  switch (action.type) {
-    case BRAND_DETAILS_REQUEST:
-      return { loading: true };
-    case BRAND_DETAILS_SUCCESS:
-      return { loading: false, brand: action.payload };
-    case BRAND_DETAILS_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

@@ -1,0 +1,12 @@
+Back_end:
+cd Back_end
+npm install –save express
+npm start
+Front_end:
+cd Front-end
+npm install react-scripts --legacy-peer-deps
+npm start
+
+//fix file.sql phần LOCK TABLE 'productdetails', 'products'
+//20 môi(1), 6 mặt(2), 10 mắt(3)
+//done csdl trên xampp

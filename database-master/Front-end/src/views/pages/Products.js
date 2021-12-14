@@ -12,10 +12,9 @@ import {
   PRODUCT_CREATE_RESET,
   PRODUCT_DELETE_RESET,
 } from '../../constants/productConstants';
-import {listProductCategories, listProductBrands} from "../../actions/productActions";
+import {listProductCategories} from "../../actions/productActions";
 import Axios from 'axios';
 import '../../utils';
-import { sizeShoes, sizeShirt } from '../../utils';
 
 
 
@@ -90,7 +89,6 @@ export const ProductsManage = (props) => {
                 <th>Tên sản phẩm</th>
                 <th>Giá tiền</th>
                 <th>Danh mục</th>
-                <th>Nhãn hàng</th>
                 <th>Thao tác</th>
               </tr>
             </thead>
@@ -102,7 +100,6 @@ export const ProductsManage = (props) => {
                   <td>{product.productName}</td>
                   <td>{numberWithCommas(product.productPrice)}</td>
                   <td>{product.category.categoryName}</td>
-                  <td>{product.brand.brandName}</td>
                   <td>
                     <button
                       type="button"
@@ -156,16 +153,12 @@ export const AddProducts = (props) => {
   const [quantityInStock, setQuantityInStock] = useState('');
   const [loadingUpload, setLoadingUpload] = useState(false);
   const [category, setCategory] = useState('');
-  const [brand, setBrand] = useState('');
   const [errorUpload, setErrorUpload] = useState('');
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const listCategory = useSelector((state) => state.listCategory);
   const {loading: loadingCategory, error: errorCategory, categories} = listCategory;
-  const listBrand = useSelector((state) => state.listBrand);
-  const {loading: loadingBrand, error: errorBrand, brands} = listBrand;
   const productCreate = useSelector((state) => state.productCreate);
-  const [sizeQuantity, setSizeQuantity] = useState(''); 
   const [categoryName, setCategoryName] = useState('');
   const {
     loading: loadingCreate,
@@ -179,14 +172,7 @@ export const AddProducts = (props) => {
       dispatch({ type: PRODUCT_CREATE_RESET });
       props.history.push('/products/productsManage');
     }
-    if(category == 1 || category == 2) {
-      setSizeQuantity(sizeShoes)
-    }
-     else {
-      setSizeQuantity(sizeShirt)
-    }
     dispatch(listProductCategories());
-    dispatch(listProductBrands())
   }, [dispatch, successCreate, props.history]);
   const submitHandler = (e) => {
     e.preventDefault();
@@ -197,8 +183,6 @@ export const AddProducts = (props) => {
         price,
         image,
         category,
-        brand,
-        sizeQuantity,
       })
     );
   };  
@@ -276,26 +260,6 @@ export const AddProducts = (props) => {
               {loadingCategory && <LoadingBox></LoadingBox>}
               {errorCategory && <MessageBox variant="danger">{errorCategory}</MessageBox>} 
             </div>
-          <div>
-              <label htmlFor="brand">Nhãn hàng</label>
-              <select className="categories-list" 
-                      value={brand}  
-                      onChange={(e) => setBrand(e.target.value)}
-              >
-              <option value=""  disabled hidden>Chọn</option>
-              { brands ? (
-              brands.map((brand) => (
-                 <option  className= "category-select" key ={brand.idBrand} value={brand.idBrand}>
-                   {brand.brandName}
-                 </option>
-              ))) : (
-                <option value=""></option>
-              )
-              }
-              </select>
-              {loadingBrand && <LoadingBox></LoadingBox>}
-              {errorBrand && <MessageBox variant="danger">{errorBrand}</MessageBox>} 
-          </div>
       <div>
           <label htmlFor="imageFile">Ảnh</label>
           {

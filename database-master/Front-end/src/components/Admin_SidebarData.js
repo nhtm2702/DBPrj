@@ -64,25 +64,5 @@ export const SidebarData = [
         cName: 'sub-nav'
       }
     ]
-  },
-  {
-    title: 'Nhãn hàng',
-    icon: <IoIcons.IoMdHelpCircle />,
-    iconClosed: <RiIcons.RiArrowDownSFill />,
-    iconOpened: <RiIcons.RiArrowUpSFill />,
-    subNav: [
-      {
-        title: 'Quản lý nhãn hàng',
-        path: '/brands/brandsManage',
-        icon: <FaIcons.FaEnvelopeOpenText />,
-        cName: 'sub-nav'
-      },
-      {
-        title: 'Thêm nhãn hàng',
-        path: '/brands/addBrands',
-        icon: <FaIcons.FaEnvelopeOpenText />,
-        cName: 'sub-nav'
-      }
-    ]
   }
 ];

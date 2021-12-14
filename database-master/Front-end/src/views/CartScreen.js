@@ -14,17 +14,14 @@ export default function CartScreen(props) {
     const qty = props.location.search
     ? Number(props.location.search.split('?')[1].split('=')[1])
     : 1;
-    const idsize =  props.location.search
-    ? Number(props.location.search.split('?')[2].split('=')[1])
-    : 1;
     const cart = useSelector((state) => state.cart);
     const { cartItems } = cart;
     const dispatch = useDispatch();
     useEffect(() => {
       if (productId) {
-        dispatch(addToCart(productId, qty,idsize));
+        dispatch(addToCart(productId, qty));
       }
-    }, [dispatch, productId, qty,idsize]); 
+    }, [dispatch, productId, qty]); 
     const removeFromCartHandler = (id) => {
         // delete action
         dispatch(removeFromCart(id));
@@ -65,11 +62,10 @@ export default function CartScreen(props) {
                                             {/* <th className="column1"><input type="checkbox"/></th> */}
                                             <th className="column2">Ảnh</th>
                                             <th className="column3">Tên sản phẩm</th>
-                                            <th className="column4">Kích cỡ</th>
-                                            <th className="column5">Giá tiền</th>
-                                            <th className="column6">Số lượng</th>
-                                            <th className="column7">Thành tiền</th>
-                                            <th className="column8"></th>
+                                            <th className="column4">Giá tiền</th>
+                                            <th className="column5">Số lượng</th>
+                                            <th className="column6">Thành tiền</th>
+                                            <th className="column7"></th>
                                             <th></th>
                                             </tr>
                                         </thead>
@@ -94,19 +90,15 @@ export default function CartScreen(props) {
                                             </td>
 
                                             <td className="column4">
-                                                <span className="item-attribute-name">{item.size}</span>
-                                            </td>
-
-                                            <td className="column5">
                                                 <span className="item-attribute">{converToPrice(item.price)}₫ </span>
                                             </td>
 
-                                            <td className="column6">
+                                            <td className="column5">
                                                 <select className="item-quantity"
                                                     value={item.qty}
                                                     onChange={(e) =>
                                                         dispatch(
-                                                        addToCart(item.product, Number(e.target.value), idsize)
+                                                        addToCart(item.product, Number(e.target.value))
                                                         )
                                                     }
                                                 >
@@ -120,11 +112,11 @@ export default function CartScreen(props) {
                                                 </select>
                                             </td>
 
-                                            <td className="column7">
+                                            <td className="column6">
                                                 {converToPrice(cartItems.reduce((a, c) => c.price * c.qty, 0))} ₫
                                             </td>
 
-                                            <td className="column8">
+                                            <td className="column7">
                                                 <button
                                                     className="remove-item"
                                                     type="button"

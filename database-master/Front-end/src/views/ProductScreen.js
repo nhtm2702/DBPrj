@@ -21,13 +21,12 @@ export default function ProductScreen(props) {
     const { loading, error, product } = productDetails;
     
     const [qty, setQty] = useState(1);
-    const [size, setSize] = useState(0);
     const incNum = () => {
-        if (qty < product.productsizes[size].quantityInStock){
+        if (qty < product.quantityInStock){
         setQty(qty+1);
         }
         else {
-            setQty(product.productsizes[size].quantityInStock);
+            setQty(product.quantityInStock);
         }
 
     };
@@ -44,11 +43,11 @@ export default function ProductScreen(props) {
 
     useEffect(() => {
       dispatch(detailsProduct(productId));
-    }, [dispatch, productId,size]);
+    }, [dispatch, productId]);
 
     const addToCartHandler = () => {
-        dispatch(addToCart(productId,qty,size));
-        props.history.push(`/cart/${productId}?qty=${qty}?size=${size}`);
+        dispatch(addToCart(productId,qty));
+        props.history.push(`/cart/${productId}?qty=${qty}`);
         
     };
     function numberWithCommas(number) {
@@ -96,7 +95,7 @@ export default function ProductScreen(props) {
                     </h1>
 
                     <div >
-                        {product.productsizes[size].quantityInStock > 0 ?(
+                        {product.quantityInStock > 0 ?(
                             <span className="productStatus"> Tình trạng: Còn hàng </span>    
                         ) : (
                         <span className="productStatus"> Tình trạng: Hết hàng </span>
@@ -121,32 +120,16 @@ export default function ProductScreen(props) {
                     <div className="product-policy">
                         <div className="product-policy-content">
                                 <FontAwesomeIcon icon={faCheckCircle} className="d-inline-block icon"/>
-                                <p className="d-inline-block"> &nbsp; Freeship cho đơn hàng từ 2.000.000đ</p> 
+                                <p className="d-inline-block"> &nbsp; Freeship cho đơn hàng từ 1.000.000đ</p> 
                         </div>
                         <div className="product-policy-content">
                                 <FontAwesomeIcon icon={faCheckCircle} className="d-inline-block icon"/>
-                                <p className="d-inline-block"> &nbsp; Bảo hành chính hãng 1 tháng với giày dép</p>
+                                <p className="d-inline-block"> &nbsp; Bảo hành chính hãng 1 tháng với tất cả các sản phẩm</p>
                         </div>
                         <div className="product-policy-content">
                                 <FontAwesomeIcon icon={faCheckCircle} className="d-inline-block icon"/>
-                                <p className="d-inline-block"> &nbsp; Freeship cho đơn hàng từ 600k ( tối đa 30k )</p> 
+                                <p className="d-inline-block"> &nbsp; Freeship cho đơn hàng từ 600k (tối đa 30k)</p> 
                         </div>
-                    </div>
-                    <div>
-                        <p/>   
-                        Kích thước: &nbsp;
-                        <select className="item-sizes" 
-                        value={size}
-                        onChange={(e) => setSize(e.target.value)}
-                            >
-                                {product.productsizes.map((x)  => (
-                                  <option key={x.idSize} value={x.idSize-1}>
-                                      {x.productSize}
-                                  </option>
-                                )
-                              )}
-                                </select>
-                        <p/>         
                     </div>
 
                     <div>
@@ -157,7 +140,7 @@ export default function ProductScreen(props) {
                     </div>
                         <p/> 
 
-                        {product.productsizes[size].quantityInStock > 0 ?(
+                        {product.quantityInStock > 0 ?(
                             <button onClick={addToCartHandler} className="addtocart">
                                 Thêm vào giỏ hàng
                             </button>

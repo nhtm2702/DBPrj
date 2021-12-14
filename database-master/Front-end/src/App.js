@@ -25,7 +25,6 @@ import { Products, ProductsManage, AddProducts } from "./views/pages/Products";
 import AdminSidebar from "./components/Admin_Sidebar";
 import Users from "./views/pages/UsersManage";
 import {ProductsTypeManage, AddProductsType,  EditCategoryScreen} from "./views/pages/ProductsType";
-import {BrandsManage, AddBrands, EditBrandScreen} from "./views/pages/Brands";
 import ProductEditScreen from './views/pages/EditProductScreen';
 import OrderScreen from "./views/OrderScreen";
 import ChangePassWordScreen from './views/ChangePasswordScreen';
@@ -66,9 +65,6 @@ function App() {
                     <AdminRoute path="/productsType/productsTypeManage" exact component={ProductsTypeManage}></AdminRoute>
                     <AdminRoute path="/productsType/addProductsType" exact component={AddProductsType}></AdminRoute>
                     <AdminRoute path="/productsType/:id/edit" exact component={EditCategoryScreen}></AdminRoute>\
-                    <AdminRoute path="/brands/brandsManage" exact component={BrandsManage}></AdminRoute>
-                    <AdminRoute path="/brands/addBrands" exact component={AddBrands}></AdminRoute>
-                    <AdminRoute path="/brands/:id/edit" exact component={EditBrandScreen}></AdminRoute>
                     <Route path="/order/:id" component={OrderScreen}></Route>
                     <PrivateRoute path="/changepassword" component={ChangePassWordScreen}></PrivateRoute>
                     <PrivateRoute path="/profile" component={ProfileScreen}></PrivateRoute>
