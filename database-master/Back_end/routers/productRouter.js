@@ -71,7 +71,7 @@ router.post("/",
                     quantityInStock: element.quantityInStock,
          })
         }
-        else {
+        else if (products.category.categoryName.search("Mắt") !== -1) {
             await db.product.create({
                 idProduct: createdProduct.idProduct,
                 quantityInStock: element.quantityInStock,

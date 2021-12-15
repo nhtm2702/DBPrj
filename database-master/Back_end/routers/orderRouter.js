@@ -14,7 +14,7 @@ orderRouter.post(  '/',
     expressAsyncHandler(async (req, res) => {
       function makeid(length) {
         var result           = '';
-        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var characters       = '0123456789';
         var charactersLength = characters.length;
         for ( var i = 0; i < length; i++ ) {
            result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -24,9 +24,8 @@ orderRouter.post(  '/',
       if (req.body.orderItems.length === 0) {
         res.status(400).send({ message: 'Cart is empty' });
       } else {
-        const count = await db.orders.findAll;
         const order = await db.orders.create({
-          idOrder: (count + 1),
+          idOrder: (makeid(5)),
           customerName: req.body.customerName,
           orderDate: req.body.orderDate,
           status: req.body.status,
