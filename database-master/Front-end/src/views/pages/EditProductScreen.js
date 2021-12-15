@@ -15,7 +15,6 @@ export default function ProductEditScreen(props) {
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
   const [category, setCategory] = useState('');
-  const [quantityInStock, setQuantityInStock] = useState('');
   const [description, setDescription] = useState('');
   const [idProduct, setIdProduct] = useState(''); 
   const listCategory = useSelector((state) => state.listCategory);
@@ -55,7 +54,7 @@ export default function ProductEditScreen(props) {
     }
 
     
-  }, [productId, product, dispatch, size, successUpdate, props.history]);
+  }, [productId, product, dispatch, successUpdate, props.history]);
   const submitHandler = (e) => {
     e.preventDefault();
     // TODO: dispatch update product
@@ -193,9 +192,9 @@ export default function ProductEditScreen(props) {
               {loadingCategory && <LoadingBox></LoadingBox>}
               {errorCategory && <MessageBox variant="danger">{errorCategory}</MessageBox>} 
             </div>
-                    <div className="quantity-button"> Số lượng: &nbsp;
-                            <input className="input" type="text" value={qty} onChange={e => setQty(e.target.value)} />
-                    </div>
+            <div className="quantity-button"> Số lượng: &nbsp;
+                <input className="input" type="text" value={qty} onChange={e => setQty(e.target.value)} />
+            </div>
             <div>
               <label htmlFor="description">Description</label>
               <textarea

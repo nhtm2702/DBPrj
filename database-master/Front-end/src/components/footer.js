@@ -14,9 +14,9 @@ function Footer() {
                 <div className="col-lg-4">
                   <div className="ft-about">
                     <div className="logo">
-                      <img src= {process.env.PUBLIC_URL+ "/image/logo.png"} alt="BG1-img" width={144} height={81} />
+                      <img src= {process.env.PUBLIC_URL+ "/image/logo.png"} alt="background-img" width={144} height={81} />
                     </div>
-                    <p> Tấu hài là chính</p>
+                    <p>Project Web DATABASE</p>
                     <div className="fa-social">
                         <a href="https://www.facebook.com/pt2907">
                           <FontAwesomeIcon icon={faFacebook} className="footer-icon" />

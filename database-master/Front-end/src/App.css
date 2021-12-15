@@ -27,8 +27,8 @@
   font-weight: bold;
 }
 .checkout-steps > div.active {
-  border-top-color: #f08000;
-  color: #f08000;
+  border-top-color: rgba(255, 145, 140, 1);
+  color: rgba(255, 145, 140, 1);
 }
 
 .form {

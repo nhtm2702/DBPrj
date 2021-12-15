@@ -1,16 +1,13 @@
-*:focus {
-  
-}
-
 .header {
   height: 100px;
   display: flex;
   align-items: center;
-  background-color: rgba(244,203,36,09);
+  background-color: rgba(255, 156, 160, 1);
   /* position: sticky; */
   top: 0;
   z-index: 100;
 }
+
 .header__logo {
   object-fit: contain;
   margin-top: 18px;
@@ -30,7 +27,7 @@
   padding: 5px;
   height: 35px !important;
   border: none;
-  background-color: #cd9042; 
+  background-color: rgba(255, 120, 145, 1); 
   border-radius: 3px;
 }
 
@@ -43,6 +40,7 @@
   border: none;
   border-radius: 3px;
 }
+
 .header__optionLineOne {
   font-size: 13px;
   font-weight: normal;
@@ -60,42 +58,48 @@
   display: flex;
   justify-content: space-evenly;
   margin-left: 20px;
-  margin-right: 20px;
+  margin-right: 20px; 
 }
+
 .header__optionBasket {
   display: flex;
   align-items: center;
   font-size: 25px;
-  color: rgb(0, 88, 0);
+  color: rgba(0, 0, 0, 1); 
   margin-top: 5px;
   margin-left: 10px;
   margin-right: 10px;
 }
+
 .header__basketCount {
   margin-right: 10px;
   margin-left: 5px;
-
 }
+
 .header__option {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   margin-left: 10px;
   margin-right: 10px;
-  color: rgb(0, 88, 0);
+  color: rgba(0, 0, 0, 1); 
   text-decoration: none; 
 }
+
 .great {
-    position: relative;
-    top: 12px;
+  position: relative;
+  top: 12px;
 }
+
 .great1 {
-    position: relative;
-    top: 20px;
+  position: relative;
+  top: 20px;
 }
+
 ::after {
     position: relative;
     top: 10px;
 }
+
 .header__option:focus {
   outline: none !important;
   outline-offset: none !important;
@@ -109,41 +113,33 @@
   height: 35px;
   padding: 0px;
   border-radius: 3px;
-  
 }
 
 .abcd{
   padding: 1.21rem 1rem;
+  color: rgba(255, 120, 145, 1);
 }
-/* .dropdown{
-  display: inline-block;
-  position: relative;
-} */
 
 .dropdown-content {
   text-align: center;
   font-size: 15px;
-  color: rgb(0, 88, 0); 
+  color: rgba(0, 0, 0, 1); 
 }
 
-.check-order, .dropdown-basic, .signin-button {
+.abcd, .dropdown-basic, .signin-button {
   display: inline-block;
   position: relative;
-  background-color: rgba(244,203,36,09);
-  border: rgba(244,203,36,09);
+  background: rgba(255, 120, 145, 1);
+  border: 0;
 }
 
-.check-order:hover, .dropdown-basic:hover, .signin-button:hover {
-  background-color: rgba(244,203,36,09);
-}
-
-.dropdown-basic:focus {
-  outline: none !important;
+.dropdown-basic:focus{
+  outline: none pink;
   outline-offset: none !important;
-  border: 0 !important;
+  border: 0 pink;
 }
 
-.check-order:focus {
+.abcd:focus {
   outline: none;
 }
 
@@ -160,19 +156,9 @@
   border: none;
   text-decoration: none;
   background-color: #fff;
-  
 }
 
 .signout-button:focus {
   background-color: #fff;
   outline: none;
 }
-/* @media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 568px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: landscape) {
-    .header__nav{
-      display: none;
-    }
-} */

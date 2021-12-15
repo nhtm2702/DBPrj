@@ -21,7 +21,7 @@ export default function Product(props) {
         <div key={product.idProduct} className="product">
           <div>
             <Link to={`/product/${product.idProduct}`}>
-              <img className="image" src={product.productdetails.image} alt={product.productName} />
+              <img className="image" src={product.productdetails[0].image} alt={product.productName} />
             </Link>
           </div>
           

@@ -24,8 +24,9 @@ orderRouter.post(  '/',
       if (req.body.orderItems.length === 0) {
         res.status(400).send({ message: 'Cart is empty' });
       } else {
+        const count = await db.orders.findAll;
         const order = await db.orders.create({
-          idOrder: (5),
+          idOrder: (count + 1),
           customerName: req.body.customerName,
           orderDate: req.body.orderDate,
           status: req.body.status,
@@ -43,19 +44,8 @@ orderRouter.post(  '/',
               idProduct: element.product,
               priceEach: element.price,
               quantityOrder: element.qty,
-              sizeProduct: element.size,
-            })
-            const productSizes = await db.productsizes.findOne({
-              where: {
-                idSize: element.idsize,
-                idProduct: element.product,
-              }
             })
             const qty = parseInt(element.qty);
-            if(productSizes){
-              productSizes.quantityInStock = productSizes.quantityInStock - qty; 
-              productSizes.save()
-            }
         });
         res
         .status(201)
@@ -116,7 +106,7 @@ orderRouter.put(
         }
       }
   )
-      order.status = "Đã hoàn thành";
+      order.status = "Đã giao";
       order.shippedDate = dateShip;
       order.save();
   res.send(order)

@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import './css/productScreen.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { detailsProduct } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
@@ -21,6 +20,7 @@ export default function ProductScreen(props) {
     const { loading, error, product } = productDetails;
     
     const [qty, setQty] = useState(1);
+
     const incNum = () => {
         if (qty < product.quantityInStock){
         setQty(qty+1);
@@ -54,18 +54,6 @@ export default function ProductScreen(props) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-
-
-    // const imageMagnifier = (imgID) => {
-    //     let img = document.getElementById(imgID)	
-    //     let lens = document.getElementById('lens')
-
-	//     lens.style.backgroundImage = `url( ${img.src} )`
-
-	//     let ratio = 3
-
-	//     lens.style.backgroundSize = (img.width * ratio) + 'px ' + (img.height * ratio) + 'px';
-    // }
 
     return (
       <div>
@@ -128,7 +116,7 @@ export default function ProductScreen(props) {
                         </div>
                         <div className="product-policy-content">
                                 <FontAwesomeIcon icon={faCheckCircle} className="d-inline-block icon"/>
-                                <p className="d-inline-block"> &nbsp; Freeship cho đơn hàng từ 600k (tối đa 30k)</p> 
+                                <p className="d-inline-block"> &nbsp; Freeship cho đơn hàng từ 600k ( tối đa 30k )</p> 
                         </div>
                     </div>
 

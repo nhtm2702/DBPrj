@@ -15,7 +15,7 @@
 }
 
 .signin-up {
-    background: linear-gradient(to right, #046c0b 38%, #f7e702 100%);
+    background: linear-gradient(to right, pink 38%, white 100%);
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -67,7 +67,7 @@
     margin-left: auto;
     margin-right: auto;
     display: block;
-    background: linear-gradient(to right, #046c0b 15%, #f7e702 100%);
+    background: linear-gradient(to right, pink 15%, rgba(255, 145, 140, 1) 100%);
     color: rgb(255, 255, 250);
     border-radius: 10mm;
     font-size: 20px;
@@ -75,7 +75,7 @@
 }
 
 .primary:hover {
-    background: linear-gradient(to right, #05910e 15%, #fbff13 100%);
+    background: linear-gradient(to right, rgba(255, 145, 140, 1) 15%, pink 100%);
 }
 
 .primary:focus {

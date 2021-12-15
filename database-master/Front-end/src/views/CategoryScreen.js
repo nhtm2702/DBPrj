@@ -9,9 +9,6 @@ import {searchCategory} from '../actions/searchActions';
 import {Link} from "react-router-dom";
 import {prices} from "../utils"
 
-import Pagination from 'react-bootstrap/Pagination'
-import PageItem from 'react-bootstrap/PageItem'
-
 export default function CategoryScreen(props) {
     
     const param = new URLSearchParams(props.location.search);

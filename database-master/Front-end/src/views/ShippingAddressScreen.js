@@ -1,3 +1,4 @@
+//done
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveShippingAddress } from '../actions/cartActions';
@@ -135,7 +136,7 @@ export default function ShippingAddressScreen(props) {
                 required
                 onChange={(e) => setPaymentMethod(e.target.value)}
               ></input>
-              <label htmlFor="stripe">TIền mặt</label>
+              <label htmlFor="stripe">Tiền mặt</label>
             </div>
           </div>
         </div>

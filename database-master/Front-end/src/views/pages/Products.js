@@ -89,6 +89,7 @@ export const ProductsManage = (props) => {
                 <th>Tên sản phẩm</th>
                 <th>Giá tiền</th>
                 <th>Danh mục</th>
+                <th>Nhãn hàng</th>
                 <th>Thao tác</th>
               </tr>
             </thead>
@@ -182,6 +183,7 @@ export const AddProducts = (props) => {
         name,
         price,
         image,
+        quantityInStock,
         category,
       })
     );
@@ -236,6 +238,16 @@ export const AddProducts = (props) => {
                 placeholder="Nhập giá tiền"
                 value={price}
                 onChange={(e) => setPrice(parseInt(e.target.value))}
+              ></input>
+        </div>  
+        <div>
+              <label htmlFor="quantityInStock">Số hàng còn</label>
+              <input
+                id="quantityInStock"
+                type="text"
+                placeholder="Nhập số lượng"
+                value={quantityInStock}
+                onChange={(e) => setQuantityInStock(parseInt(e.target.value))}
               ></input>
         </div>  
         <div>

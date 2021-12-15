@@ -32,15 +32,16 @@ export default function HomeScreen() {
             <div className="home">    
                 <div className="home__container">
                     <img className="home__image" 
-                    src = "..//../image/background2.jpg" alt ="" />
+                    src = "..//../image/BG2.jpg" alt ="" />
                     <div className="titleCategory">
-                    <span className="nav">Sản phẩm yêu thích</span>
+                    <span className="nav">Sản phẩm mới</span>
                     </div>
                     <div className="home__row">
                         {products.map((product) => (
                             <Product key={product.idProduct} product={product}> </Product>
                         ))}
                     </div>
+                    
                     <div>
  
                     {loadingProduct ? (<LoadingBox></LoadingBox>) : 

@@ -1,7 +1,7 @@
 const express = require("express");
 const db = require('../models');
 const router = express.Router();
-const data1 = require('../data1');
+const data1 = require('../data');
 const expressAsyncHandler =  require('express-async-handler');
 const bcrypt = require('bcryptjs');
 const {generateToken, isAuth, isAdmin} = require('../utlis');
@@ -85,7 +85,7 @@ router.delete(
         where:{
           idUser: userId}});
       if (user) {
-        if (user.isAdmin) {
+        if (user.isAdmin == 1) {
           res.status(400).send({ message: 'Can Not Delete Admin User' });
           return;
         }

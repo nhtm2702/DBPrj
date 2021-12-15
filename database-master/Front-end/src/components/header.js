@@ -64,7 +64,7 @@ function Header(props) {
 
               <div className="header__nav">
                 <Link to = "/orderhistory" style={{textDecoration: 'none'}}>
-                <button className="btn btn-warning abcd">
+                <button className="abcd">
                   <div className="header__option">
                    
                     <span className="header__optionLineOne">Kiểm tra</span>
@@ -80,15 +80,15 @@ function Header(props) {
                   userInfo ? (
                   <div>
                     <Dropdown className="dropdown">
-                      
-                      <Dropdown.Toggle id="dropdown-basic" variant="warning" >
-                      
-                        <div className="header__option great">
+                    <Dropdown.Toggle className="dropdown-basic"  style={{background: 'rgba(255, 120, 145, 1)'}}>
+                    <div className="header__option great">
+                          
                           <span className="header__optionLineOne">Xin chào!!!</span>
 
                           <span className="header__optionLineTwo">{userInfo.Fname} {userInfo.Lname}</span>     
                         </div> 
-                      </Dropdown.Toggle>
+
+                    </Dropdown.Toggle>
 
                       <Dropdown.Menu  className="dropdown-signout"> 
 
@@ -119,7 +119,7 @@ function Header(props) {
 
                   ) : (
                     
-                  <button className="btn btn-warning abcd">
+                  <button className="abcd">
                        <Link to ="/signin" style={{textDecoration: 'none'}}>
                     <div className="header__option">
                       <span className="header__optionLineOne">Xin chào !!!</span>

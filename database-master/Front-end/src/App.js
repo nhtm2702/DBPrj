@@ -12,14 +12,12 @@ import Footer from "./components/footer";
 import SignupScreen from "./views/SignupScreen";
 import SigninScreen from "./views/SigninScreen";
 import ShippingAddressScreen from "./views/ShippingAddressScreen";
-import PaymentScreen from "./views/PaymentScreen";
 import PlaceOrderScreen from "./views/PlaceOrderScreen";
 import OrderHistoryScreen from "./views/OrderHistoryScreen";
 import AdminScreen from "./views/AdminScreen";
 import { useSelector } from "react-redux";
 import CategoryScreen from "./views/CategoryScreen";
 import NavBar from "./components/navbar";
-import Home from "./views/pages/Home";
 import {OrdersManage} from "./views/pages/Orders";
 import { Products, ProductsManage, AddProducts } from "./views/pages/Products";
 import AdminSidebar from "./components/Admin_Sidebar";
@@ -37,7 +35,7 @@ function App() {
   return (
     <Router>
       <div>
-        {userInfo && userInfo.isAdmin ? (
+        {userInfo && (userInfo.isAdmin == 1) ? (
           <div>
             <HeaderAdmin />
           </div>
@@ -49,7 +47,7 @@ function App() {
         )}
         <main>
          
-          {userInfo && userInfo.isAdmin ? (
+          {userInfo && (userInfo.isAdmin == 1) ? (
             <>
               <div className="row ahihi">
                 <AdminSidebar></AdminSidebar>

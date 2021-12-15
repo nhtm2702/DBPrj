@@ -1,6 +1,6 @@
 const db = require('../models');
 const expressAsyncHandler =  require('express-async-handler');
-const data = require("../dataimport");
+const data = require("../data");
 const { search } = require('../routers/uploadRouter');
 
 
@@ -10,13 +10,7 @@ module.exports.productdetail = expressAsyncHandler(async( req,res) => {
             model: db.productdetail
         },
         {
-            model: db.productsizes
-        },
-        {
             model: db.categories,
-        },
-        {
-            model: db.brands,
         }],
         where:{
             idProduct: req.params.id
@@ -41,8 +35,6 @@ module.exports.products =  expressAsyncHandler(async(req,res)=>{
                 model: db.productdetail,
                 offset: 0,
                 limit: 1,
-            },{
-                model: db.brands,
             },
             {
                 model: db.categories,
@@ -59,10 +51,8 @@ module.exports.products =  expressAsyncHandler(async(req,res)=>{
 
 module.exports.postProducts =  expressAsyncHandler(async (req, res) => {
     const createc =  await db.categories.bulkCreate(data.categories);
-    const createb =   await db.brands.bulkCreate(data.brands);
     const createpd = await db.products.bulkCreate(data.products);
     const createp =   await db.productdetail.bulkCreate(data.productdetail);
-    const createps = await db.productsizes.bulkCreate(data.productsizes);
-    res.send({createc, createb, createp,createpd});
+    res.send({createc,createp,createpd});
 
 });

@@ -2,13 +2,11 @@ const express = require("express");
 const db = require('../models');
 const router = express.Router();
 const expressAsyncHandler =  require('express-async-handler');
-const data1 = require("../data1");
+const data1 = require("../data");
 const productController = require('../controllers/productController');
 const { isAdmin, isAuth} = require('../utlis');
 const { route } = require("./uploadRouter");
 const Sequelize = require('sequelize');
-const data = require("../data");
-const Op = Sequelize.Op;
 
 
 
@@ -16,12 +14,6 @@ router.get("/categories",
 expressAsyncHandler(async (req, res) => {
     const categories = await db.categories.findAll();
     res.send(categories);
-
-}));
-router.get("/brands", 
-expressAsyncHandler(async (req, res) => {
-    const brands = await db.brands.findAll();
-    res.send(brands);
 
 }));
 
@@ -53,7 +45,6 @@ router.post("/",
             productPrice: req.body.price,
             productDescription:"ss",
             quantityInStock: req.body.quantityInStock,
-            idBrand: req.body.brand,
             idCategory: req.body.category,
         });
         const createdetail = await db.productdetail.create({
@@ -68,27 +59,23 @@ router.post("/",
                 model: db.categories,
             }
         })
-        if (products.category.categoryName.search("Giày") !== -1) {
-            const array = data.sizeShoes;
-            array.forEach(async(element) => {
-                await db.productsizes.create({
+        if (products.category.categoryName.search("Môi") !== -1) {
+                await db.product.create({
                     idProduct: createdProduct.idProduct,
-                    idSize: element.idSize,
                     quantityInStock: element.quantityInStock,
-                    productSize: element.productSize,
-            })
-         }) 
+            }) 
+        }
+        else if (products.category.categoryName.search("Mặt") !== -1){
+                await db.product.create({
+                    idProduct: createdProduct.idProduct,
+                    quantityInStock: element.quantityInStock,
+         })
         }
         else {
-            const array = data.sizeShirt;
-            array.forEach(async(element) => {
-                await db.productsizes.create({
-                    idProduct: createdProduct.idProduct,
-                    idSize: element.idSize,
-                    quantityInStock: element.quantityInStock,
-                    productSize: element.productSize,
-            })
-         })
+            await db.product.create({
+                idProduct: createdProduct.idProduct,
+                quantityInStock: element.quantityInStock,
+        })
         }
         console.log(products.category.categoryName); 
         res.send({ message: 'Product Created', product: createdProduct });
@@ -161,72 +148,6 @@ router.get(
   })
 );
 
-
-router.post("/brand",
-    isAuth,
-    isAdmin,
-    expressAsyncHandler(async (req, res) => {
-        const createdBrand = await db.brands.create({
-            brandName: req.body.nameBrand,
-        });
-        res.send({ message: 'Brand create', category: createdBrand });
-    }
-));
-router.delete(
-    '/brand/:id',
-    isAuth,
-    isAdmin,
-    expressAsyncHandler(async (req, res) => {
-        const brand = await db.brands.findOne({
-            where:{
-                idBrand: req.params.id
-            }
-        })
-        if (brand) {
-        const deleteBrand = await brand.destroy();
-        res.send({ message: 'Brand Deleted', brand: deleteBrand });
-        } else {
-        res.status(404).send({ message: 'Brand Not Found' });
-        }
-  })
-);
-router.get(
-    '/brand/:id',
-    isAuth,
-    isAdmin,
-    expressAsyncHandler(async (req, res) => {
-        const brand = await db.brands.findOne({
-            where:{
-                idBrand: req.params.id
-            }
-        })
-        if (brand) {
-            res.send(brand);
-        } else {
-            res.status(404).send({ message: 'Brand Not Found' });
-        }
-  })
-);
-router.put(
-    '/brand/:id',
-    isAuth,
-    isAdmin,
-    expressAsyncHandler(async (req, res) => {
-        const brand = await db.brands.findOne({
-            where:{
-                idBrand: req.params.id
-            }
-        })
-        if (brand) {
-            brand.brandName = req.body.name;
-            updateBrand = brand.save();
-            res.send({ message: 'Brand Update', brand: updateBrand });
-        } else {
-            res.status(404).send({ message: 'Brand Not Found' });
-        }
-  })
-);
-
 router.put(
     '/:id',
     isAuth,
@@ -244,17 +165,11 @@ router.put(
                 idImage: 1
             }],
         })
-        const productSize = await db.productsizes.findOne({
-            where:[{
-                idProduct: productId,
-                idSize: req.body.size,
-            }]
-        })
         if (product) {
             product.productName = req.body.name;
             product.productPrice = req.body.price;
             product.productDescription = req.body.description;
-            product.idBrand = req.body.brand;
+            product.quantityInStock = req.body.quantityInStock;
             product.idCategory = req.body.category;
             await product.save();
         } 
@@ -263,12 +178,7 @@ router.put(
             productImage.image = req.body.image;
             await productImage.save();
         }
-        const count = req.body.qty;
-        const quantity = parseInt(count)
-        if (productSize) {
-            productSize.quantityInStock = quantity;
-            await productSize.save();
-        }
+
         if(product){
         res.send({ message: 'Product Updated'});}
         else {
@@ -293,7 +203,7 @@ router.get("/test",
                 model: db.categories,
             }
         })
-        const check = product.category.categoryName.search("Áo")
+        const check = product.category.categoryName.search("Môi")
         res.send({check});
     }));
    
@@ -307,34 +217,13 @@ router.get("/test",
                 productName: product.productName,
                 productPrice: product.productPrice,
                 productDescription: product.productDescription,
-                idBrand: product.idBrand,
+                quantityInStock: product.quantityInStock,
                 idCategory: product.idCategory,
             })
-            if (product.idCategory == 1 || product.idCategory == 2) {
-            data.sizeShoes.forEach(async(size) => {
-                   await db.productsizes.create({
-                      idProduct:  product.idProduct,
-                      idSize: size.idSize,
-                      quantityInStock: size.quantityInStock,
-                      productSize: size.productSize,
-                   })
-               })
-            }
-            else {
-            data.sizeShirt.forEach(async(size) => {
-                    await db.productsizes.create({
-                       idProduct:  product.idProduct,
-                       idSize: size.idSize,
-                       quantityInStock: size.quantityInStock,
-                       productSize: size.productSize,
-                    })  
-                })
-            }
-        }
-        )
-        res.send("Thành công"); 
-    }
-));    
+            res.send("Thành công");
+        },
+        )}));
+
 router.get("/importimage", expressAsyncHandler(async (req, res) => {
     await db.productdetail.bulkCreate(data1.productdetail);
     res.send("Thành công"); 

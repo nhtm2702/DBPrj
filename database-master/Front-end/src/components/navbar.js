@@ -1,14 +1,11 @@
 import React, { useEffect, useState}  from "react";
 import './css/navbar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HorizontalSplitIcon from '@material-ui/icons/HorizontalSplit';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import {Link} from "react-router-dom";
 import {listProductCategories} from "../actions/productActions";
-import { IconContext } from "react-icons/lib";
 import * as FaIcons from "react-icons/fa";
 import 'bootstrap/dist/js/bootstrap.bundle';
 import 'jquery/dist/jquery.min.js';

@@ -1,5 +1,5 @@
 .footer-section {
-    background: #222736;
+    background: rgba(255, 156, 160, 1);
 	left: 5%;
 	display: flex;
 }
@@ -16,7 +16,7 @@
 	display: flex;
 }
 .footer-section .footer-text .ft-about p {
-    color: #aaaab3;
+    color: rgba(0, 0, 0, 1);
     margin-bottom: 20px;
     
 }
@@ -28,7 +28,7 @@
 	line-height: 40px;
 	text-align: center;
 	color: #ffffff;
-	border: 1px solid #5A4D48;
+	border: 1px solid #ffffff;
 	border-radius: 50%;
 	-webkit-transition: all 0.3s;
 	-o-transition: all 0.3s;
@@ -36,8 +36,8 @@
 	margin-right: 7px;
 }
 .footer-section .footer-text .ft-about .fa-social a:hover {
-	background: #dfa974;
-	border-color: #dfa974;
+	background: rgba(255, 140, 145, 1);
+	border-color: rgba(255, 140, 145, 1);
 }
 .footer-section .footer-text .ft-contact {
     margin-bottom: 30px;
@@ -45,7 +45,7 @@
 }
 .footer-section .footer-text .ft-contact h6 {
 	font-size: 14px;
-	color: #dfa974;
+	color: rgba(0, 0, 0, 1);
 	text-transform: uppercase;
 	font-weight: 700;
 	letter-spacing: 3px;
@@ -54,14 +54,14 @@
 }
 .footer-section .footer-text .ft-contact ul li {
 	font-size: 16px;
-	color: #aaaab3;
+	color: rgba(0, 0, 0, 1);
 	line-height: 32px;
 	list-style: circle;
 	margin-left: 0px;
 }
 .footer-section .footer-text .ft-news h6 {
 	font-size: 14px;
-	color: #dfa974;
+	color: rgba(0, 0, 0, 1);
 	text-transform: uppercase;
 	font-weight: 700;
 	letter-spacing: 3px;
@@ -69,7 +69,7 @@
 	margin-bottom: 20px;
 }
 .footer-section .footer-text .ft-news p {
-	color: #aaaab3;
+	color: rgba(0, 0, 0, 1);
 	margin-bottom: 20px;
 }
 .footer-section .footer-text .ft-news .fn-form {
@@ -79,7 +79,7 @@
 	width: 70%;
 	height: 40px;
 	border-radius: 2px;
-	background: #393D4A;
+	background: #ffffff;
 	border: none;
 	padding-left: 20px;
 	font-size: 16px;
@@ -105,5 +105,5 @@
 #icon_send{
 	font-size: 40px;
 	border: none;
-	background-color: #cd9042; 
+	background-color: rgba(255, 120, 145, 1); 
 }

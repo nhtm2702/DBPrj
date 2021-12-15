@@ -54,7 +54,7 @@ function Header(props) {
                   <div>
                   <Dropdown className="dropdown">
                       
-                      <Dropdown.Toggle className="dropdown-basic" style={{backgroundColor: 'rgba(244,203,36,09)'}}>
+                      <Dropdown.Toggle className="dropdown-basic" style={{backgroundColor: 'rgba(255, 120, 145, 1)'}}>
                       
                         <div className="header__option">
                           <span className="header__optionLineOne">Xin chào</span>

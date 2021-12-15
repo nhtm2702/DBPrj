@@ -1,5 +1,5 @@
 const db = require('../models');
-const data = require('../dataimport');
+const data = require('../data');
 const expressAsyncHandler =  require('express-async-handler');
 const bcrypt = require('bcryptjs');
 const {generateToken} = require('../utlis');

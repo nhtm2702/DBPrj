@@ -35,7 +35,7 @@ exports.isAuth = (req, res, next) => {
   }
 };
 exports.isAdmin = (req, res, next) => {
-  if (req.user && req.user.isAdmin) {
+  if (req.user && req.user.isAdmin == 1) {
     next();
   } else {
     res.status(401).send({ message: 'Invalid Admin Token' });

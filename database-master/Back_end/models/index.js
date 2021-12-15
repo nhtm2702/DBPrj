@@ -64,20 +64,6 @@ db.productdetail.belongsTo(db.products,{
   }
 });
 
-db.products.belongsTo(db.brands, {
-  foreignKey:{
-    name: 'idBrand',
-    allowNull: false,
-  }
-});
-db.brands.hasMany(db.products,{
-  foreignKey:{
-    name: 'idBrand',
-    allowNull: false,
-  }
-});
-
-
 db.products.belongsTo(db.categories,{
   foreignKey:{
     name:'idCategory',
@@ -109,16 +95,6 @@ db.products.hasMany(db.orderdetail,{
   }
 })
 db.orderdetail.belongsTo(db.products,{
-  foreignKey:{
-    name:'idProduct',
-    primaryKey: true,
-    allowNull: false,
-  }
-}
-)
-
-
-db.products.hasMany(db.productsizes,{
   foreignKey:{
     name:'idProduct',
     primaryKey: true,

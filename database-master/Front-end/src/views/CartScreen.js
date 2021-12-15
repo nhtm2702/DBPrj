@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MessageBox from '../components/MessageBox';
 import { addToCart, removeFromCart } from '../actions/cartActions';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
 import './css/cartScreen.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -62,10 +60,10 @@ export default function CartScreen(props) {
                                             {/* <th className="column1"><input type="checkbox"/></th> */}
                                             <th className="column2">Ảnh</th>
                                             <th className="column3">Tên sản phẩm</th>
-                                            <th className="column4">Giá tiền</th>
-                                            <th className="column5">Số lượng</th>
-                                            <th className="column6">Thành tiền</th>
-                                            <th className="column7"></th>
+                                            <th className="column5">Giá tiền</th>
+                                            <th className="column6">Số lượng</th>
+                                            <th className="column7">Thành tiền</th>
+                                            <th className="column8"></th>
                                             <th></th>
                                             </tr>
                                         </thead>
@@ -89,11 +87,11 @@ export default function CartScreen(props) {
                                                 </Link>
                                             </td>
 
-                                            <td className="column4">
+                                            <td className="column5">
                                                 <span className="item-attribute">{converToPrice(item.price)}₫ </span>
                                             </td>
 
-                                            <td className="column5">
+                                            <td className="column6">
                                                 <select className="item-quantity"
                                                     value={item.qty}
                                                     onChange={(e) =>
@@ -112,11 +110,11 @@ export default function CartScreen(props) {
                                                 </select>
                                             </td>
 
-                                            <td className="column6">
+                                            <td className="column7">
                                                 {converToPrice(cartItems.reduce((a, c) => c.price * c.qty, 0))} ₫
                                             </td>
 
-                                            <td className="column7">
+                                            <td className="column8">
                                                 <button
                                                     className="remove-item"
                                                     type="button"

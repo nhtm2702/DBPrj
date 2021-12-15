@@ -33,8 +33,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
         },
         isAdmin:{
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
+            type: DataTypes.INTEGER,
+            defaultValue: 0,
         }
     },{
         tableName: 'users',
